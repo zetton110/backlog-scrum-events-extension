@@ -23,7 +23,6 @@ export class PopupComponent {
     private _fb: FormBuilder) {}
 
   ngOnInit(){
-    console.log("init")
     this._localStorageService.loadInfo()
     this._initForm()
   }
