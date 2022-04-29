@@ -4,6 +4,7 @@ import { bindCallback } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TAB_ID } from '../../../../providers/tab-id.provider';
 import { LocalStorageService } from '../../../../service/local-storage.service';
+import { BacklogApiService } from '../../../../service/backlog-api.service';
 
 @Component({
   selector: 'app-popup',
@@ -18,11 +19,12 @@ export class PopupComponent {
   constructor(
     @Inject(TAB_ID) readonly tabId: number,
     private _localStorageService :LocalStorageService,
+    private _backlogApiService :BacklogApiService,
     private _fb: FormBuilder) {}
 
   ngOnInit(){
     console.log("init")
-    this._localStorageService.clearAllLocalStorage()
+    this._localStorageService.loadInfo()
     this._initForm()
   }
 
@@ -34,10 +36,26 @@ export class PopupComponent {
 
  setInfo() {
   const { apiKey } = this.form.value
-  console.log(`apiKey:${apiKey}`)
   this._localStorageService.setInfo({
      apiKey
   })
+}
+callBacklogApi(){
+  this.myInfo$.subscribe(
+    info =>{
+      this._backlogApiService.getMyself(info.apiKey)
+      .subscribe(
+        (data) => {
+          console.log("sucess!")
+          console.log(JSON.stringify(data))
+        },
+        (data) => {
+          console.log("error!")
+          console.log(JSON.stringify(data))
+        }
+      )
+    }
+  )
 }
 
 clearInfo() {

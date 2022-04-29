@@ -16,6 +16,11 @@
       <button (click)="clearAll()" type="button">
         clear all local storage
       </button>
+
+      <button (click)="callBacklogApi()" type="button">
+        call backlog api
+      </button>
+
   </form>
 
   <div *ngIf="myInfo$ | async as myInfo">
