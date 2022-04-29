@@ -1,7 +1,33 @@
-<h1>Popup</h1>
-<p>You can easily send messages from the popup to the content page with the provided Tab ID!
-  (tabId=<strong>{{ tabId }}</strong>)</p>
+<div>
+  <p>You can easily send messages from the popup to the content page with the provided Tab ID!
+    (tabId=<strong>{{ tabId }}</strong>)</p>
 
-<button (click)="onClick()">Click me to test</button>
+  <form *ngIf="form" [formGroup]="form">
+      <input formControlName="apiKey" type="text" placeHolder="apiKey" />
+      
+      <button (click)="setInfo()" type="button">
+        set Info
+      </button>
 
-<p><strong>{{ message }}</strong></p>
+      <button (click)="clearInfo()" type="button">
+        clear Info
+      </button>
+
+      <button (click)="clearAll()" type="button">
+        clear all local storage
+      </button>
+  </form>
+
+  <div *ngIf="myInfo$ | async as myInfo">
+
+    apiKey: {{ myInfo?.apiKey || "no apiKey set" }}
+  
+  </div>
+  
+  
+  <button (click)="onClick()">Click me to test</button>
+  
+  <p><strong>{{ message }}</strong></p>
+
+  
+</div>
