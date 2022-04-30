@@ -11,4 +11,8 @@ export class BacklogApiService {
   getMyself(apiKey: string){
     return this.http.get(`https://nulab.backlog.jp/api/v2/users/myself?apiKey=${ apiKey }`)
   }
+
+  getProjects(apiKey: string){
+    return this.http.get(`https://nulab.backlog.jp/api/v2/projects?apiKey=${ apiKey }`)
+  }
 }
