@@ -23,4 +23,8 @@ export class BacklogApiService {
   getStatuses(apiKey:string, projectId:string){
     return this.http.get(`https://nulab.backlog.jp/api/v2/projects/${projectId}/statuses?apiKey=${projectId}`)
   }
+
+  getIssues(apiKey:string, projectId:string, milestoneId:string){
+    return this.http.get(`https://nulab.backlog.jp/api/v2/issues?projectId[0]=${projectId}&milestoneId[0]=${milestoneId}&apiKey=${projectId}`)
+  }
 }
