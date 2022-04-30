@@ -42,7 +42,7 @@ export class PopupComponent {
 callBacklogApi(){
   this.myInfo$.subscribe(
     info =>{
-      this._backlogApiService.getMyself(info.apiKey)
+      this._backlogApiService.getOwnUser(info.apiKey)
       .subscribe(
         (data) => {
           console.log("sucess!")
