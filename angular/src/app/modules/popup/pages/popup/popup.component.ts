@@ -28,9 +28,13 @@ export class PopupComponent {
   }
 
   private _initForm() {
-    this.form = this._fb.group({
-       apiKey: ['']
-    })
+    this.myInfo$.subscribe(
+      info=>{
+        this.form = this._fb.group({
+          apiKey: [info.apiKey]
+       })
+      }
+    )
  }
 
  setInfo() {
