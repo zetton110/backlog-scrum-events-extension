@@ -15,6 +15,7 @@ export class PopupComponent {
   message: string;
   myInfo$ = this._localStorageService.myData$;
   form: FormGroup;
+  projectList = null;
 
   constructor(
     @Inject(TAB_ID) readonly tabId: number,
@@ -35,6 +36,25 @@ export class PopupComponent {
        })
       }
     )
+ }
+
+ loadBacklogProject(){
+  this.myInfo$.subscribe(
+    info =>{
+      this._backlogApiService.getProjectList(info.apiKey)
+      .subscribe(
+        (data) => {
+          this.projectList = data;
+          console.log("sucess!")
+          console.log(JSON.stringify(data))
+        },
+        (data) => {
+          console.log("error!")
+          console.log(JSON.stringify(data))
+        }
+      )
+    }
+  )
  }
 
  setInfo() {

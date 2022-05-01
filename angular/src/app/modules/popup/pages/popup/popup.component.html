@@ -4,6 +4,16 @@
 
   <form *ngIf="form" [formGroup]="form">
       <input formControlName="apiKey" type="text" placeHolder="apiKey" />
+      <input 
+        formControlName="project"
+        type="text"
+        list="yourProjectList" 
+        placeholder="select your project" 
+        autocomplete="off" 
+        *ngIf="projectList">
+      <datalist id="yourProjectList">
+        <option *ngFor="let project of projectList">{{ project.name }}
+      </datalist>
       
       <button (click)="callBacklogApi()" type="button">
         call backlog api
@@ -17,6 +27,19 @@
   
   </div>
   
+  <div>
+
+    <button (click)="loadBacklogProject()" type="button">
+      loadBacklogProject
+    </button>
+
+  </div>
+
+  <div>
+
+    
+
+  </div>
   
   <!-- <button (click)="onClick()">Click me to test</button> -->
   
