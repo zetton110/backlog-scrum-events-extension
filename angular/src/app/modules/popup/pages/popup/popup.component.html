@@ -3,8 +3,12 @@
     (tabId=<strong>{{ tabId }}</strong>)</p> -->
 
   <form *ngIf="form" [formGroup]="form">
-      <input formControlName="apiKey" type="text" placeHolder="apiKey" />
       <input 
+        formControlName="apiKey" 
+        type="text" 
+        placeHolder="apiKey" />
+      
+        <input 
         formControlName="project"
         type="text"
         list="yourProjectList" 
