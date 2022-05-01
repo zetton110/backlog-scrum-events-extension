@@ -34,6 +34,10 @@
         call backlog api
       </button>
 
+    <ul>
+      <li *ngFor="let issue of issues">{{issue.issueKey}} | {{ issue.estimatedHours }} </li>
+    </ul>
+
   </form>
 
   <div *ngIf="myInfo$ | async as myInfo">
@@ -50,6 +54,10 @@
 
     <button (click)="loadBacklogMilestone()" type="button">
       loadBacklogMilestone
+    </button>
+
+    <button (click)="loadIssues()" type="button">
+      loadIssues
     </button>
 
   </div>

@@ -17,6 +17,7 @@ export class PopupComponent {
   form: FormGroup;
   projectList = null;
   milestoneList = null;
+  issues = null;
 
   constructor(
     @Inject(TAB_ID) readonly tabId: number,
@@ -73,6 +74,31 @@ export class PopupComponent {
       .subscribe(
         (data) => {
           this.milestoneList = data;
+          console.log("sucess!")
+          console.log(JSON.stringify(data))
+        },
+        (data) => {
+          console.log("error!")
+          console.log(JSON.stringify(data))
+        }
+      )
+    }
+  )
+ }
+
+ getIdFromMilestoneList(){
+  const milestoneName = this.form.controls["milestone"].value
+  const target = this.milestoneList.find((m)=> m.name == milestoneName)
+  return target.id;
+}
+
+ loadIssues(){
+  this.myInfo$.subscribe(
+    info =>{
+      this._backlogApiService.getIssueList(info.apiKey, this.getIdFromProjectList(), this.getIdFromMilestoneList())
+      .subscribe(
+        (data) => {
+          this.issues = data;
           console.log("sucess!")
           console.log(JSON.stringify(data))
         },
