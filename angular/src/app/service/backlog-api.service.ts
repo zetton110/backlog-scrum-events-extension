@@ -25,19 +25,19 @@ export class BacklogApiService {
   // Returns list of Versions/Milestones in the project.
   // DOC: https://developer.nulab.com/docs/backlog/api/2/get-version-milestone-list/#
   getVersionMilestoneList(apiKey:string, projectId:string){
-    return this.http.get(`https://nulab.backlog.jp/api/v2/projects/${projectId}/versions?apiKey=${projectId}`)
+    return this.http.get(`https://nulab.backlog.jp/api/v2/projects/${projectId}/versions?apiKey=${apiKey}`)
   }
   // 'Get Status List of Project' Api EndPoint
   // Returns list of status in the project.
   // DOC: https://developer.nulab.com/docs/backlog/api/2/get-status-list-of-project/#
   getStatusListOfProject(apiKey:string, projectId:string){
-    return this.http.get(`https://nulab.backlog.jp/api/v2/projects/${projectId}/statuses?apiKey=${projectId}`)
+    return this.http.get(`https://nulab.backlog.jp/api/v2/projects/${projectId}/statuses?apiKey=${apiKey}`)
   }
 
   // 'Get Issue List' Api EndPoint
   // Returns list of issues.
   // DOC: https://developer.nulab.com/docs/backlog/api/2/get-issue-list/#
   getIssueList(apiKey:string, projectId:string, milestoneId:string){
-    return this.http.get(`https://nulab.backlog.jp/api/v2/issues?projectId[0]=${projectId}&milestoneId[0]=${milestoneId}&apiKey=${projectId}`)
+    return this.http.get(`https://nulab.backlog.jp/api/v2/issues?projectId[0]=${projectId}&milestoneId[0]=${milestoneId}&apiKey=${apiKey}`)
   }
 }
