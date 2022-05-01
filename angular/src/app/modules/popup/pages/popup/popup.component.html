@@ -8,12 +8,13 @@
         type="text" 
         placeHolder="apiKey" />
       
-        <input 
-        formControlName="project"
-        type="text"
-        list="yourProjectList" 
-        placeholder="select your project" 
-        autocomplete="off">
+      <input 
+      formControlName="project"
+      type="text"
+      list="yourProjectList" 
+      placeholder="select your project" 
+      autocomplete="off">
+      
       <datalist id="yourProjectList">
         <option *ngFor="let project of projectList">{{ project.name }}
       </datalist>
