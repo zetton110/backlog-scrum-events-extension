@@ -18,6 +18,17 @@
       <datalist id="yourProjectList">
         <option *ngFor="let project of projectList">{{ project.name }}
       </datalist>
+
+      <input 
+      formControlName="milestone"
+      type="text"
+      list="yourMilestoneList" 
+      placeholder="select your milestone" 
+      autocomplete="off">
+
+    <datalist id="yourMilestoneList">
+      <option *ngFor="let milestone of milestoneList">{{ milestone.name }}
+    </datalist>
       
       <button (click)="callBacklogApi()" type="button">
         call backlog api
@@ -35,6 +46,10 @@
 
     <button (click)="loadBacklogProject()" type="button">
       loadBacklogProject
+    </button>
+
+    <button (click)="loadBacklogMilestone()" type="button">
+      loadBacklogMilestone
     </button>
 
   </div>

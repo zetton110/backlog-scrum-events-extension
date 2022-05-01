@@ -16,6 +16,7 @@ export class PopupComponent {
   myInfo$ = this._localStorageService.myData$;
   form: FormGroup;
   projectList = null;
+  milestoneList = null;
 
   constructor(
     @Inject(TAB_ID) readonly tabId: number,
@@ -32,7 +33,9 @@ export class PopupComponent {
     this.myInfo$.subscribe(
       info=>{
         this.form = this._fb.group({
-          apiKey: [info.apiKey]
+          apiKey: [info.apiKey],
+          project: "",
+          milestone: ""
        })
       }
     )
@@ -45,6 +48,31 @@ export class PopupComponent {
       .subscribe(
         (data) => {
           this.projectList = data;
+          console.log("sucess!")
+          console.log(JSON.stringify(data))
+        },
+        (data) => {
+          console.log("error!")
+          console.log(JSON.stringify(data))
+        }
+      )
+    }
+  )
+ }
+
+ getIdFromProjectList(){
+    const projectName = this.form.controls["project"].value
+    const target = this.projectList.find((p)=> p.name == projectName)
+    return target.id;
+ }
+
+ loadBacklogMilestone(){
+  this.myInfo$.subscribe(
+    info =>{
+      this._backlogApiService.getVersionMilestoneList(info.apiKey, this.getIdFromProjectList())
+      .subscribe(
+        (data) => {
+          this.milestoneList = data;
           console.log("sucess!")
           console.log(JSON.stringify(data))
         },
