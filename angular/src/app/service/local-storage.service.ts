@@ -1,3 +1,4 @@
+import { TryCatchStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject,Observable } from 'rxjs';
 import { LocalStorageRefService } from './local-storage-ref.service';
@@ -20,16 +21,24 @@ export class LocalStorageService {
   private _myData$ = new BehaviorSubject<MyData>(null)
   public myData$ = this._myData$.asObservable()
 
+   init(){
+      const data = { apiKey: "" }
+      this._localStorage.setItem('myData', JSON.stringify(data))
+      this._myData$.next(data)  
+   }
+
   setInfo(data: MyData) {
-    console.log(`data:${ JSON.stringify(data) }`)
     const jsonData = JSON.stringify(data)
     this._localStorage.setItem('myData', jsonData)
     this._myData$.next(data)
  }
 
  loadInfo() {
-    const data = JSON.parse(this._localStorage.getItem('myData'))
-    this._myData$.next(data)
+    if(!this._localStorage.getItem('myData')){
+       this.init()
+    }
+      const data = JSON.parse(this._localStorage.getItem('myData'))
+      this._myData$.next(data)        
  }
 
  clearInfo() {

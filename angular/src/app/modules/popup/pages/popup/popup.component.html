@@ -8,6 +8,10 @@
         type="text" 
         placeHolder="apiKey" />
       
+        <button (click)="setInfo()" type="button">
+          Api Set
+        </button>
+
       <input 
         formControlName="project"
         type="text"
@@ -64,13 +68,12 @@
 
   <div>
 
+    <button (click)="onClick()">Click me to test</button>
+    <p><strong>{{ message }}</strong></p>
     
 
   </div>
   
-  <!-- <button (click)="onClick()">Click me to test</button> -->
   
-  <!-- <p><strong>{{ message }}</strong></p> -->
-
   
 </div>
