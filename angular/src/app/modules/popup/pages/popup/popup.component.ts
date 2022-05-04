@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ɵɵsetComponentScope } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { bindCallback } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -35,8 +35,8 @@ export class PopupComponent {
       info=>{
         this.form = this._fb.group({
           apiKey: [info.apiKey],
-          project: "",
-          milestone: ""
+          project: [info.project],
+          milestone: [info.milestone]
        })
       }
     )
@@ -112,11 +112,20 @@ export class PopupComponent {
  }
 
  setInfo() {
-  const { apiKey } = this.form.value
+  const { apiKey, project, milestone } = this.form.value
   this._localStorageService.setInfo({
-     apiKey
-  })
+    apiKey, project, milestone
+ })
 }
+
+saveProjectMilestone() {
+  const { apiKey, project, milestone } = this.form.value
+  this._localStorageService.setInfo({
+    apiKey, project, milestone
+ })
+  console.log(`project:${project}//milestone${milestone}`)
+}
+
 callBacklogApi(){
   this.myInfo$.subscribe(
     info =>{

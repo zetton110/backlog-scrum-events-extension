@@ -2,7 +2,11 @@
   <!-- <p>You can easily send messages from the popup to the content page with the provided Tab ID!
     (tabId=<strong>{{ tabId }}</strong>)</p> -->
 
+  <p>Setting</p>
+
   <form *ngIf="form" [formGroup]="form">
+    <p>API Key</p>
+    
       <input 
         formControlName="apiKey" 
         type="text" 
@@ -12,28 +16,42 @@
           Api Set
         </button>
 
-      <input 
+        <!-- <div *ngIf="myInfo$ | async as myInfo">
+
+          apiKey: {{ myInfo?.apiKey || "no apiKey set" }}
+        
+        </div> -->
+
+    <div *ngIf="(myInfo$|async)?.apiKey !== ''">
+        <p>Project/Milestone</p>
+        <input 
         formControlName="project"
         type="text"
         list="yourProjectList" 
         placeholder="select your project" 
         autocomplete="off">
 
-      <datalist id="yourProjectList">
-        <option *ngFor="let project of projectList">{{ project.name }}
-      </datalist>
+        <datalist id="yourProjectList">
+          <option *ngFor="let project of projectList">{{ project.name }}
+        </datalist>
 
-      <input 
-      formControlName="milestone"
-      type="text"
-      list="yourMilestoneList" 
-      placeholder="select your milestone" 
-      autocomplete="off">
+        <input 
+        formControlName="milestone"
+        type="text"
+        list="yourMilestoneList" 
+        placeholder="select your milestone" 
+        autocomplete="off">
 
-    <datalist id="yourMilestoneList">
-      <option *ngFor="let milestone of milestoneList">{{ milestone.name }}
-    </datalist>
+        <datalist id="yourMilestoneList">
+          <option *ngFor="let milestone of milestoneList">{{ milestone.name }}
+        </datalist>
       
+      </div>
+
+      <button (click)="saveProjectMilestone()" type="button">
+        Save
+      </button>
+
       <button (click)="callBacklogApi()" type="button">
         call backlog api
       </button>
@@ -44,11 +62,7 @@
 
   </form>
 
-  <div *ngIf="myInfo$ | async as myInfo">
 
-    apiKey: {{ myInfo?.apiKey || "no apiKey set" }}
-  
-  </div>
   
   <div>
 

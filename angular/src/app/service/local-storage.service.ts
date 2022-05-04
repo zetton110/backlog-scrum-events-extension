@@ -4,7 +4,9 @@ import { BehaviorSubject,Observable } from 'rxjs';
 import { LocalStorageRefService } from './local-storage-ref.service';
 
 interface MyData {
-  apiKey: string
+  apiKey: string,
+  project: string,
+  milestone: string,
 }
 
 @Injectable({
@@ -22,7 +24,7 @@ export class LocalStorageService {
   public myData$ = this._myData$.asObservable()
 
    init(){
-      const data = { apiKey: "" }
+      const data = { apiKey: "", project: "", milestone: "" }
       this._localStorage.setItem('myData', JSON.stringify(data))
       this._myData$.next(data)  
    }
