@@ -3,13 +3,25 @@ chrome.runtime.onMessage.addListener((request, sender, respond) => {
     if (request) {
       console.log("fired!!!!!!!!!")
 
-      // document.body.style.backgroundColor = "black";
-      let element = document.createElement("div"); // <button></button> ができる
-      element.textContent = "Push Me!!!!!!!!!!!!!";               // <button>Push Me!</button> ができる
-      element.style.color = "red"
-      element.style.fontSize = "100px"
-      let target = document.querySelector("div.LS8OJ"); // 追加したい要素を見つけてくる
-      target.appendChild(element); // 追加する
+      let targets = document.querySelectorAll(".css-yt6om-box"); // 追加したい要素を見つけてくる
+      var entities = Object.entries(targets)
+      entities.forEach(([key,value])=>{
+        let element = document.createElement("div");
+        element.textContent = "aaa";
+        element.style.color = "red";
+        element.style.fontSize = "20px";
+        element.className = "css-1k18oqv-box expand"
+        console.log(`${key}:${value}`)
+        if (value.innerHTML.includes("Open")) console.log("This is Open")ßß
+        if (value.innerHTML.includes("In Progress")) console.log("This is In Progress")
+        if (value.innerHTML.includes("In Review")) console.log("This is In Review")
+        if (value.innerHTML.includes("Resolved")) console.log("This is Resolved")
+        if (value.innerHTML.includes("Waiting for release")) console.log("This is Waiting for release")
+        if (value.innerHTML.includes("Closed")) console.log("This is Closed")
+        value.appendChild(element);
+      })
+
+      
       // let target = document.getElementsByClassName("FPdoLc lJ9FBc"); // 追加したい要素を見つけてくる
       // let target = document.getElementsByClassName("css-1fbld2x-box"); // 追加したい要素を見つけてくる
       // let target = document.querySelector(".css-1fbld2x-box"); // 追加したい要素を見つけてくる
