@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener((request, sender, respond) => {
         element.style.fontSize = "20px";
         element.className = "css-1k18oqv-box expand"
         console.log(`${key}:${value}`)
-        if (value.innerHTML.includes("Open")) console.log("This is Open")ßß
+        if (value.innerHTML.includes("Open")) console.log("This is Open")
         if (value.innerHTML.includes("In Progress")) console.log("This is In Progress")
         if (value.innerHTML.includes("In Review")) console.log("This is In Review")
         if (value.innerHTML.includes("Resolved")) console.log("This is Resolved")
