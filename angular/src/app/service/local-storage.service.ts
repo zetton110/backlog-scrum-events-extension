@@ -24,23 +24,43 @@ export class LocalStorageService {
   public myData$ = this._myData$.asObservable()
 
    init(){
-      const data = { apiKey: "", project: "", milestone: "" }
+      const data:MyData = { apiKey: "", project: "", milestone: "" }
       this._localStorage.setItem('myData', JSON.stringify(data))
-      this._myData$.next(data)  
+      chrome.storage.local.set(data, function() {
+         console.log(`stored:${JSON.stringify(data)}`);
+         this._myData$.next(data);
+       });
    }
 
   setInfo(data: MyData) {
-    const jsonData = JSON.stringify(data)
-    this._localStorage.setItem('myData', jsonData)
-    this._myData$.next(data)
+    let jsonData = JSON.stringify(data)
+    chrome.storage.local.set(data, function() {
+      console.log(`stored:${JSON.stringify(data)}`);
+      this._myData$.next(data);
+    });
+
+
+   //  this._localStorage.setItem('myData', jsonData)
  }
 
- loadInfo() {
-    if(!this._localStorage.getItem('myData')){
-       this.init()
-    }
-      const data = JSON.parse(this._localStorage.getItem('myData'))
-      this._myData$.next(data)        
+ loadInfo = async() => {
+   let myData:MyData = { apiKey: "", project: "", milestone: "" }
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.get(myData, (items:MyData) => {
+        if (items === undefined) {
+          reject();
+        } else {
+          this._myData$.next(items);
+          resolve(items);
+        }
+      });
+   })
+
+   //  if(!this._localStorage.getItem('myData')){
+   //     this.init()
+   //  }
+   //    const data = JSON.parse(this._localStorage.getItem('myData'))
+   //    this._myData$.next(data)        
  }
 
  clearInfo() {

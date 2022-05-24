@@ -5,7 +5,8 @@
   "version": "1.0.0",
   "description": "Generated with @larscom/ng-chrome-extension",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "action": {
     "default_popup": "index.html?#/popup",

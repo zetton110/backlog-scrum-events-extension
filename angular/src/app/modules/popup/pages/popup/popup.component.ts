@@ -26,13 +26,15 @@ export class PopupComponent {
     private _fb: FormBuilder) {}
 
   ngOnInit(){
-    this._localStorageService.loadInfo()
-    this._initForm()
+    this._localStorageService.loadInfo().then(()=>{
+      this._initForm()
+    })
   }
 
   private _initForm() {
     this.myInfo$.subscribe(
       info=>{
+        console.log(`iiiiiinfo::::${ JSON.stringify(info) }`)
         this.form = this._fb.group({
           apiKey: [info.apiKey],
           project: [info.project],
